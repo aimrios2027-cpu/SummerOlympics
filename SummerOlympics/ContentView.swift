@@ -30,16 +30,64 @@ struct ContentView: View {
                  "2024-paris-france.png",
                  "2028-los-angeles-usa.png",
                  "2032-brisbane-australia"]
+    @State private var logoNumber = 22
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, World!")
+            Text("Olympic Logos")
+                .font(.largeTitle)
+                .fontWeight(.black)
+            
+            Spacer()
+            
+            Image(getImageName(logoName: logos[logoNumber]))
+                .resizable()
+                .scaledToFit()
+            
+            Spacer()
+            
+            Text("\")
         }
         .padding()
     }
+    
+    func getImageName(logoName: String) -> String {
+        // 3 extensions: .png, .jpg, and .jpeg
+        var newLogoName = logoName.replacingOccurrences(of: ".png", with: "")
+        newLogoName = newLogoName.replacingOccurrences(of: ".jpg", with: "")
+        return newLogoName.replacingOccurrences(of: ".jpeg", with: "")
+    }
+    
+    
+    func getYear(logoName: String) -> String {
+        var componentsArray = logoName.components(separatedBy: "-")
+        return componentsArray[0]
+    }
+    
+    func getCountry(logoName: String) -> String {
+        var componentsArray = logoName.components(separatedBy: "-")
+        var country = componentsArray.last ?? ""
+        country = getImageName(logoName: country)
+        if country.lowercased() == "usa" {
+            country.uppercased()
+        } else {
+            country = country.capitalized
+        }
+        return country
+    }
+    func getCity(logoName: String) -> String {
+        var componentsArray = logoName.components(separatedBy: "-")
+        componentsArray.removeFirst()
+        componentsArray.removeLast()
+        var city = ""
+        for component in componentsArray {
+            city = city + component + " "
+        }
+        // Remove space at the end of city
+        city.removeLast()
+        return city.capitalized
+    }
+
 }
 
 #Preview {
