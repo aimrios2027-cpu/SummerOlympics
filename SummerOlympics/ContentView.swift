@@ -91,12 +91,12 @@ struct ContentView: View {
     
     
     func getYear(logoName: String) -> String {
-        var componentsArray = logoName.components(separatedBy: "-")
+        let componentsArray = logoName.components(separatedBy: "-")
         return componentsArray[0]
     }
     
     func getCountry(logoName: String) -> String {
-        var componentsArray = logoName.components(separatedBy: "-")
+        let componentsArray = logoName.components(separatedBy: "-")
         var country = componentsArray.last ?? ""
         country = getImageName(logoName: country)
         if country.lowercased() == "usa" {
