@@ -46,7 +46,38 @@ struct ContentView: View {
             
             Spacer()
             
-            Text("\")
+            VStack {
+                Text("\(getCity(logoName: logos[logoNumber])), \(getCity(logoName: logos[logoNumber]))")
+                
+                
+            Text(getYear(logoName: logos[logoNumber]))
+            }
+            
+            
+                .font(.largeTitle)
+                .fontWeight(.thin)
+            
+            HStack {
+                Button {
+                    logoNumber = logoNumber - 1
+                } label: {
+                    Image(systemName: "chevron.left.to.line")
+                }
+                .disabled(logoNumber == 0)
+                
+                Spacer()
+                
+                Button {
+                    logoNumber += 1
+                } label: {
+                    Image(systemName: "chevron.right.to.line")
+                }
+                .disabled(logoNumber == logos.count-1)
+            }
+            
+            .font(.largeTitle)
+            .fontWeight(.black)
+            .tint(.black)
         }
         .padding()
     }
